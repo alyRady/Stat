@@ -2,13 +2,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { CorrelationRegressionComponent } from './correlation-regression/correlation-regression.component';
+import { CritereXComponent } from './critere-x/critere-x.component';
+import { IntervalleConfianceComponent } from './intervalle-confiance/intervalle-confiance.component';
+import {RouterModule, Routes} from '@angular/router';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+const appRoutes: Routes = [
+    {path: 'correlation-regression', component: CorrelationRegressionComponent},
+    {path: 'critereX', component: CritereXComponent},
+    {path: 'intervalle-confiance', component: IntervalleConfianceComponent},
+    {path: '', component: CorrelationRegressionComponent},
+    {path: '**', component: CorrelationRegressionComponent}
+  ]
+;
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CorrelationRegressionComponent,
+    CritereXComponent,
+    IntervalleConfianceComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
