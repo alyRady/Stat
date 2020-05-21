@@ -8,10 +8,12 @@ import { IntervalleConfianceComponent } from './intervalle-confiance/intervalle-
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { EstimationsComponent } from './estimations/estimations.component';
 const appRoutes: Routes = [
     {path: 'correlation-regression', component: CorrelationRegressionComponent},
     {path: 'critereX', component: CritereXComponent},
     {path: 'intervalle-confiance', component: IntervalleConfianceComponent},
+  {path: 'estimations', component: EstimationsComponent},
     {path: '', component: CorrelationRegressionComponent},
     {path: '**', component: CorrelationRegressionComponent}
   ]
@@ -22,7 +24,8 @@ const appRoutes: Routes = [
     AppComponent,
     CorrelationRegressionComponent,
     CritereXComponent,
-    IntervalleConfianceComponent
+    IntervalleConfianceComponent,
+    EstimationsComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule
