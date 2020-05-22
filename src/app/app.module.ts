@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { CorrelationRegressionComponent } from './correlation-regression/correlation-regression.component';
@@ -28,7 +29,7 @@ const appRoutes: Routes = [
     EstimationsComponent
   ],
   imports: [
-    BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule
+    BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule, NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
