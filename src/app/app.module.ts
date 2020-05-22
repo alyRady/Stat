@@ -29,7 +29,7 @@ const appRoutes: Routes = [
     EstimationsComponent
   ],
   imports: [
-    BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule, NgbModule
+    BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule, NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
