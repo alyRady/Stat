@@ -42,21 +42,17 @@ export class CritereXComponent implements OnInit {
       this.freqEmp.push(String((Number(this.splitVal[1]) - Number(this.splitVal[0])) / this.taille )) ;
       sommePpv = sommePpv + (Number(this.splitFreq[i]) * Number(this.splitVal[0]));
       sommePgv = sommePgv + (Number(this.splitFreq[i]) * Number(this.splitVal[1]));
-      console.log(splitPi[i]);
       this.calcX = this.calcX + Math.pow(Number(this.freqRel[i]) - Number(splitPi[i]), 2) / Number(splitPi[i]);
-      console.log(this.calcX);
     }
     this.ppv = String(sommePpv / this.taille) ;
     this.ppv = Number.parseFloat(this.ppv).toFixed(2) ;
     this.pgv = String(sommePgv / this.taille) ;
     this.pgv = Number.parseFloat(this.pgv).toFixed(2);
     this.resX = String(this.taille * this.calcX) ;
-    console.log(this.resX);
     this.resX = Number.parseFloat(this.resX).toFixed(2) ;
-    console.log(this.resX);
   }
 
-  calculerUni() {
+  /*calculerUni() {
     this.splitFreq = [] ;
     this.splitInt = [] ;
     this.splitVal = [] ;
@@ -79,6 +75,6 @@ export class CritereXComponent implements OnInit {
     this.ppv = Number.parseFloat(this.ppv).toFixed(2) ;
     this.pgv = String(sommePgv / this.taille) ;
     this.pgv = Number.parseFloat(this.pgv).toFixed(2);
-  }
+  }*/
 
 }
