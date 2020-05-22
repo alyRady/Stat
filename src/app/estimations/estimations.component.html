@@ -1,1 +1,31 @@
-<p>estimations works!</p>
+<h4><b><u>Estimations d'un échantillon :</u></b></h4>
+<div class="form-group row">
+  <label for="ValeursX" class="col-md-2 col-form-label">Valeurs de X : </label>
+  <div class="col-xs-8 col-sm-4">
+    <textarea type="text" class="form-control " id="ValeursX" rows="3" [(ngModel)]="valX"></textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="ValeursY" class="col-md-2 col-form-label">Valeurs de Y : </label>
+  <div class="col-xs-8 col-sm-4">
+    <textarea type="text" class="form-control " id="ValeursY" rows="3" [(ngModel)]="valY"></textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="Prediction" class="col-md-2 col-form-label">Prediction : </label>
+  <div class="col-xs-8 col-sm-4">
+    <input type="text" class="form-control" id="Prediction" [(ngModel)]="pred">
+  </div>
+</div>
+<div class="col text-center"><button class="btn btn-success" (click)="calculer()">Calculer</button></div>
+<b>Esperance de X : </b>{{espX}} <br>
+<b>Esperance de Y : </b>{{espY}} <br>
+<b>Variance de X : </b>{{varX}} <br>
+<b>Variance de Y : </b>{{varY}} <br>
+<b>Covariance : </b>{{covar}} <br>
+<b>Coefficient de correlation : </b>{{coef}} <br>
+<b>Formule ligne de regression : y = aX + b </b> <br>
+<b>a : </b>{{a}} <br>
+<b>aX : </b>{{aX}} <br>
+<b>b : </b>{{b}} <br>
+<b>y : </b>{{y}} <br>
