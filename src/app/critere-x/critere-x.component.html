@@ -18,15 +18,15 @@
   </div>
 </div>
 <div class="form-group row">
-  <label for="pi" class="col-md-2 col-form-label">P'i : </label>
+  <label for="intPi" class="col-md-2 col-form-label">Loi normale : </label>
   <div class="col-xs-8 col-sm-4">
-    <input type="text" class="form-control" id="pi" [(ngModel)]="pi">
+    <input type="text" class="form-control" id="intPi" [(ngModel)]="loi">
   </div>
 </div>
 <div class="col text-center"><button class="btn btn-success" (click)="calculerNorm()">Calculer</button></div>
 <b>Plus petite valeur : </b>{{ppv}} <br>
 <b>Plus grande valeur : </b>{{pgv}} <br>
-<b>Hypothèse X² : </b>{{resX}} <br>
+<b>Hypothèse X² : </b>{{resX}} <br> <br>
 <table class="table table-striped">
   <thead>
   <tr>
@@ -42,6 +42,9 @@
     <td>{{this.splitFreq[i]}}</td>
     <td>{{this.freqRel[i]}}</td>
     <td>{{this.freqEmp[i]}}</td>
+    <td>{{this.valPi1[i]}}</td>
+    <td>{{this.valPi2[i]}}</td>
+    <td>{{this.resPi[i]}}</td>
   </tr>
   </tbody>
 </table>
@@ -56,4 +59,5 @@
 <b>aX : </b>{{aX}} <br>
 <b>b : </b>{{b}} <br>
 <b>y : </b>{{y}} <br>
-<button class="btn btn-success" (click)="calculerUni()">Loi Uniforme</button></div>-->
+<button class="btn btn-success" (click)="calculerUni()">Loi Uniforme</button></div>
+<button class="btn btn-success" (click)="erf()">erf</button>-->
