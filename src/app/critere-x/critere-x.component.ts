@@ -20,6 +20,7 @@ export class CritereXComponent implements OnInit {
   calcX: number;
   resX: string;
   loi: string;
+  loiUni: string;
   valPi1: string[];
   valPi2: string[];
   resPi: string[];
@@ -53,15 +54,15 @@ export class CritereXComponent implements OnInit {
     this.splitFreq = this.freq.split(' ') ;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0 ; i < this.splitFreq.length ; i++ ) {
-      this.freqRel.push(String(Number(this.splitFreq[i]) / this.taille )) ;
+      this.freqRel.push(String((Number(this.splitFreq[i]) / this.taille ).toFixed(4))) ;
       this.splitVal = this.splitInt[i].split(';');
-      this.freqEmp.push(String((Number(this.splitVal[1]) - Number(this.splitVal[0])) / this.taille )) ;
+      this.freqEmp.push(String(((Number(this.splitVal[1]) - Number(this.splitVal[0])) / this.taille ).toFixed(4))) ;
       sommePpv = sommePpv + (Number(this.splitFreq[i]) * Number(this.splitVal[0]));
       sommePgv = sommePgv + (Number(this.splitFreq[i]) * Number(this.splitVal[1]));
       calcPi1 = (Number(this.splitVal[1]) - Number(splitLoi[0])) / Number(splitLoi[1]);
       calcPi2 = (Number(this.splitVal[0]) - Number(splitLoi[0])) / Number(splitLoi[1]);
-      this.valPi1.push(String(calcPi1));
-      this.valPi2.push(String(calcPi2));
+      this.valPi1.push(String(calcPi1.toFixed(2)));
+      this.valPi2.push(String(calcPi2.toFixed(2)));
       if ( calcPi1 < 0 && calcPi2 < 0 ) {
         switch (Math.abs(calcPi1)) {
           case 0: {
@@ -230,6 +231,208 @@ export class CritereXComponent implements OnInit {
     this.resX = String(this.taille * this.calcX) ;
     this.resX = Number.parseFloat(this.resX).toFixed(2) ;
   }
+  calculerUni() {
+    this.calcX = 0 ;
+    this.splitFreq = [] ;
+    this.valPi1 = [] ;
+    this.valPi2 = [] ;
+    this.splitInt = [] ;
+    this.splitVal = [] ;
+    this.freqEmp = [] ;
+    this.freqRel = [] ;
+    this.resPi = [] ;
+    let sommePpv = 0;
+    let sommePgv = 0;
+    let calcPi1 = 0;
+    let calcPi2 = 0;
+    const f0 = 0.5;
+    const f1 = 0.84134;
+    const f2 = 0.97725;
+    const f3 = 0.99865;
+    const f4 = 0.99997;
+    const f5 = 0.99999;
+    // const splitPi = this.pi.split(' ') ;
+    const splitLoi = this.loi.split(';') ;
+    const splitLoiUni = this.loiUni.split(' ') ;
+    this.splitInt = this.intervalle.split(' ') ;
+    this.splitFreq = this.freq.split(' ') ;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0 ; i < this.splitFreq.length ; i++ ) {
+      this.freqRel.push(String((Number(this.splitFreq[i]) / this.taille ).toFixed(4))) ;
+      this.splitVal = this.splitInt[i].split(';');
+      this.freqEmp.push(String(((Number(this.splitVal[1]) - Number(this.splitVal[0])) / this.taille ).toFixed(4))) ;
+      sommePpv = sommePpv + (Number(this.splitFreq[i]) * Number(this.splitVal[0]));
+      sommePgv = sommePgv + (Number(this.splitFreq[i]) * Number(this.splitVal[1]));
+      calcPi1 = (Number(this.splitVal[1]) - Number(splitLoi[0])) / Number(splitLoi[1]);
+      calcPi2 = (Number(this.splitVal[0]) - Number(splitLoi[0])) / Number(splitLoi[1]);
+      this.valPi1.push(String(calcPi1.toFixed(2)));
+      this.valPi2.push(String(calcPi2.toFixed(2)));
+      if ( calcPi1 < 0 && calcPi2 < 0 ) {
+        switch (Math.abs(calcPi1)) {
+          case 0: {
+            calcPi1 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi1 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi1 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi1 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi1 = f4 ;
+            break;
+          }
+        }
+        switch (Math.abs(calcPi2)) {
+          case 0: {
+            calcPi2 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi2 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi2 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi2 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi2 = f4 ;
+            break;
+          }
+        }
+        if (Math.abs(calcPi1) >= 5) {
+          calcPi1 = f5 ;
+        }
+        if (Math.abs(calcPi2) >= 5) {
+          calcPi2 = f5 ;
+        }
+      } else if ( calcPi1 >= 0 && calcPi2 < 0 ) {
+        switch (Math.abs(calcPi1)) {
+          case 0: {
+            calcPi1 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi1 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi1 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi1 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi1 = f4 ;
+            break;
+          }
+        }
+        switch (Math.abs(calcPi2)) {
+          case 0: {
+            calcPi2 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi2 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi2 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi2 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi2 = f4 ;
+            break;
+          }
+        }
+        if (Math.abs(calcPi1) >= 5) {
+          calcPi1 = f5 ;
+        }
+        if (Math.abs(calcPi2) >= 5) {
+          calcPi2 = f5 ;
+        }
+      } else if ( calcPi1 >= 0 && calcPi2 >= 0 ) {
+        switch (Math.abs(calcPi1)) {
+          case 0: {
+            calcPi1 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi1 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi1 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi1 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi1 = f4 ;
+            break;
+          }
+        }
+        switch (Math.abs(calcPi2)) {
+          case 0: {
+            calcPi2 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi2 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi2 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi2 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi2 = f4 ;
+            break;
+          }
+        }
+        if (Math.abs(calcPi1) >= 5) {
+          calcPi1 = f5 ;
+        }
+        if (Math.abs(calcPi2) >= 5) {
+          calcPi2 = f5 ;
+        }
+      }
+      this.resPi.push(splitLoiUni[i]);
+      console.log(this.freqRel[i]);
+      console.log(this.resPi[i]);
+      this.calcX = this.calcX + (Math.pow((Number(this.freqRel[i]) - Number(this.resPi[i])), 2) / (Number(this.resPi[i])));
+    }
+    this.ppv = String(sommePpv / this.taille) ;
+    this.ppv = Number.parseFloat(this.ppv).toFixed(2) ;
+    this.pgv = String(sommePgv / this.taille) ;
+    this.pgv = Number.parseFloat(this.pgv).toFixed(2);
+    this.resX = String(this.taille * this.calcX) ;
+    this.resX = Number.parseFloat(this.resX).toFixed(2) ;
+  }
   /*erf() {
     const x = 3.5;
     const lim = ((1 / 3) * Math.pow(x , 3)) - (0.5 * x) ;
@@ -245,28 +448,207 @@ export class CritereXComponent implements OnInit {
   }
 
   calculerUni() {
+    this.calcX = 0 ;
     this.splitFreq = [] ;
+    this.valPi1 = [] ;
+    this.valPi2 = [] ;
     this.splitInt = [] ;
     this.splitVal = [] ;
     this.freqEmp = [] ;
     this.freqRel = [] ;
+    this.resPi = [] ;
     let sommePpv = 0;
     let sommePgv = 0;
+    let calcPi1 = 0;
+    let calcPi2 = 0;
+    const f0 = 0.5;
+    const f1 = 0.84134;
+    const f2 = 0.97725;
+    const f3 = 0.99865;
+    const f4 = 0.99997;
+    const f5 = 0.99999;
+    // const splitPi = this.pi.split(' ') ;
+    const splitLoi = this.loi.split(';') ;
     this.splitInt = this.intervalle.split(' ') ;
     this.splitFreq = this.freq.split(' ') ;
-    const splitPi = this.pi.split(' ') ;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0 ; i < this.splitFreq.length ; i++ ) {
-      this.freqRel.push(String(Number(this.splitFreq[i]) / this.taille )) ;
+      this.freqRel.push(String((Number(this.splitFreq[i]) / this.taille ).toFixed(4))) ;
       this.splitVal = this.splitInt[i].split(';');
-      this.freqEmp.push(String((Number(this.splitVal[1]) - Number(this.splitVal[0])) / this.taille )) ;
+      this.freqEmp.push(String(((Number(this.splitVal[1]) - Number(this.splitVal[0])) / this.taille ).toFixed(4))) ;
       sommePpv = sommePpv + (Number(this.splitFreq[i]) * Number(this.splitVal[0]));
       sommePgv = sommePgv + (Number(this.splitFreq[i]) * Number(this.splitVal[1]));
+      calcPi1 = (Number(this.splitVal[1]) - Number(splitLoi[0])) / Number(splitLoi[1]);
+      calcPi2 = (Number(this.splitVal[0]) - Number(splitLoi[0])) / Number(splitLoi[1]);
+      this.valPi1.push(String(calcPi1.toFixed(2)));
+      this.valPi2.push(String(calcPi2.toFixed(2)));
+      if ( calcPi1 < 0 && calcPi2 < 0 ) {
+        switch (Math.abs(calcPi1)) {
+          case 0: {
+            calcPi1 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi1 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi1 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi1 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi1 = f4 ;
+            break;
+          }
+        }
+        switch (Math.abs(calcPi2)) {
+          case 0: {
+            calcPi2 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi2 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi2 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi2 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi2 = f4 ;
+            break;
+          }
+        }
+        if (Math.abs(calcPi1) >= 5) {
+          calcPi1 = f5 ;
+        }
+        if (Math.abs(calcPi2) >= 5) {
+          calcPi2 = f5 ;
+        }
+        this.resPi.push(String((calcPi2 - calcPi1).toFixed(4)));
+      } else if ( calcPi1 >= 0 && calcPi2 < 0 ) {
+        switch (Math.abs(calcPi1)) {
+          case 0: {
+            calcPi1 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi1 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi1 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi1 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi1 = f4 ;
+            break;
+          }
+        }
+        switch (Math.abs(calcPi2)) {
+          case 0: {
+            calcPi2 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi2 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi2 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi2 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi2 = f4 ;
+            break;
+          }
+        }
+        if (Math.abs(calcPi1) >= 5) {
+          calcPi1 = f5 ;
+        }
+        if (Math.abs(calcPi2) >= 5) {
+          calcPi2 = f5 ;
+        }
+        this.resPi.push(String((calcPi1 + calcPi2).toFixed(4)));
+      } else if ( calcPi1 >= 0 && calcPi2 >= 0 ) {
+        switch (Math.abs(calcPi1)) {
+          case 0: {
+            calcPi1 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi1 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi1 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi1 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi1 = f4 ;
+            break;
+          }
+        }
+        switch (Math.abs(calcPi2)) {
+          case 0: {
+            calcPi2 = f0 ;
+            break;
+          }
+          case 1: {
+            calcPi2 = f1 ;
+            break;
+          }
+          case 2: {
+            calcPi2 = f2 ;
+            break;
+          }
+          case 3: {
+            calcPi2 = f3 ;
+            break;
+          }
+          case 4: {
+            calcPi2 = f4 ;
+            break;
+          }
+        }
+        if (Math.abs(calcPi1) >= 5) {
+          calcPi1 = f5 ;
+        }
+        if (Math.abs(calcPi2) >= 5) {
+          calcPi2 = f5 ;
+        }
+        this.resPi.push(String((calcPi1 - calcPi2).toFixed(4)));
+      }
+      console.log(this.freqRel[i]);
+      console.log(this.resPi[i]);
+      this.calcX = this.calcX + (Math.pow((Number(this.freqRel[i]) - Number(this.resPi[i])), 2) / (Number(this.resPi[i])));
     }
     this.ppv = String(sommePpv / this.taille) ;
     this.ppv = Number.parseFloat(this.ppv).toFixed(2) ;
     this.pgv = String(sommePgv / this.taille) ;
     this.pgv = Number.parseFloat(this.pgv).toFixed(2);
+    this.resX = String(this.taille * this.calcX) ;
+    this.resX = Number.parseFloat(this.resX).toFixed(2) ;
   }
   erff() {
     const X = 1 ;

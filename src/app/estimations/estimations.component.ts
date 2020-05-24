@@ -19,7 +19,7 @@ export class EstimationsComponent implements OnInit {
   a: string;
   aX: string;
   b: string;
-  y: string
+  y: string;
   constructor( private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
