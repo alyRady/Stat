@@ -1,9 +1,18 @@
 url : https://repl.it/languages/python3<br>
-import math <br>
+
+import math<br>
+b = False<br>
 def phi(x):<br>
 &nbsp;&nbsp;return (1.0 + math.erf(x / math.sqrt(2.0))) / 2.0<br>
-i=2.99<br>
-if(i<3):<br>
-&nbsp;&nbsp;print(round(phi(i),4))<br>
-elif(i>=3):<br>
-&nbsp;&nbsp;print(round(phi(i),5))<br>
+while(b==False):<br>
+&nbsp;&nbsp;print("3ayez kam :")<br>
+&nbsp;&nbsp;i= float(input())<br>
+&nbsp;&nbsp;if(i<3):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(round(phi(i),4))<br>
+&nbsp;&nbsp;elif(i>=3):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(round(phi(i),5))<br>
+&nbsp;&nbsp;print("Tani ? y/n")<br>
+&nbsp;&nbsp;r=input()<br>
+&nbsp;&nbsp;if(r=="n"):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b=True<br>
+
