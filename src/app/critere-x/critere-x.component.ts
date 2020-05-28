@@ -421,7 +421,7 @@ export class CritereXComponent implements OnInit {
           calcPi2 = f5 ;
         }
       }
-      this.resPi.push(splitLoiUni[i]);
+      this.resPi.push(String((Number(this.splitVal[1]) - Number(this.splitVal[0])) * Number(splitLoiUni[i])));
       console.log(this.freqRel[i]);
       console.log(this.resPi[i]);
       this.calcX = this.calcX + (Math.pow((Number(this.freqRel[i]) - Number(this.resPi[i])), 2) / (Number(this.resPi[i])));
