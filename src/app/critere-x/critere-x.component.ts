@@ -24,11 +24,13 @@ export class CritereXComponent implements OnInit {
   valPi1: string[];
   valPi2: string[];
   resPi: string[];
+  h: number[];
   constructor() { }
 
   ngOnInit(): void {
   }
   calculerNorm() {
+    this.h = [] ;
     this.calcX = 0 ;
     this.splitFreq = [] ;
     this.valPi1 = [] ;
@@ -220,9 +222,8 @@ export class CritereXComponent implements OnInit {
         }
         this.resPi.push(String((calcPi1 - calcPi2).toFixed(4)));
       }
-      console.log(this.freqRel[i]);
-      console.log(this.resPi[i]);
       this.calcX = this.calcX + (Math.pow((Number(this.freqRel[i]) - Number(this.resPi[i])), 2) / (Number(this.resPi[i])));
+      this.h.push(Number(this.splitFreq[i]) / (Number(this.splitVal[1]) - Number(this.splitVal[0])));
     }
     this.ppv = String(sommePpv / this.taille) ;
     this.ppv = Number.parseFloat(this.ppv).toFixed(2) ;
@@ -232,6 +233,7 @@ export class CritereXComponent implements OnInit {
     this.resX = Number.parseFloat(this.resX).toFixed(2) ;
   }
   calculerUni() {
+    this.h = [];
     this.calcX = 0 ;
     this.splitFreq = [] ;
     this.valPi1 = [] ;
@@ -425,6 +427,7 @@ export class CritereXComponent implements OnInit {
       console.log(this.freqRel[i]);
       console.log(this.resPi[i]);
       this.calcX = this.calcX + (Math.pow((Number(this.freqRel[i]) - Number(this.resPi[i])), 2) / (Number(this.resPi[i])));
+      this.h.push(Number(this.splitFreq[i]) / (Number(this.splitVal[1]) - Number(this.splitVal[0])));
     }
     this.ppv = String(sommePpv / this.taille) ;
     this.ppv = Number.parseFloat(this.ppv).toFixed(2) ;
