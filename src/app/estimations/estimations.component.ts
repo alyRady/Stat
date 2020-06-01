@@ -7,8 +7,8 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./estimations.component.css']
 })
 export class EstimationsComponent implements OnInit {
-  valX: string
-  valY: string
+  valX: string;
+  valY: string;
   espX: string;
   espY: string;
   varX: string;
@@ -20,6 +20,11 @@ export class EstimationsComponent implements OnInit {
   aX: string;
   b: string;
   y: string;
+  sommeCol: number[];
+  effX: number[];
+  effY: number[];
+  calcFreq: number[];
+  T: number;
   constructor( private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -32,11 +37,24 @@ export class EstimationsComponent implements OnInit {
     let calcCo = 0 ;
     const splittedX = this.valX.split(' ');
     const splittedY = this.valY.split(' ');
+    this.sommeCol = [];
+    this.effX = [];
+    this.effY = [];
+    this.calcFreq = [];
+    this.T = 0 ;
     for (const i of splittedX) {
       sommeX = sommeX + Number(i);
     }
     for (const i of splittedY) {
       sommeY = sommeY + Number(i);
+    }
+    for (let i = 0 ; i < splittedX.length ; i++) {
+      this.sommeCol.push(Number(splittedX[i]) + Number(splittedY[i]));
+      this.calcFreq.push(Number((this.sommeCol[i] / (sommeX + sommeY)).toFixed(5)));
+      this.effX.push(Number((sommeX * this.calcFreq[i]).toFixed(5)));
+      this.effY.push(Number((sommeY * this.calcFreq[i]).toFixed(5)));
+      this.T = this.T + (Math.pow((Number(splittedX[i]) - this.effX[i]), 2) / this.effX[i]) ;
+      this.T = this.T + (Math.pow((Number(splittedY[i]) - this.effY[i]), 2) / this.effY[i]) ;
     }
     this.espX = String(sommeX / splittedX.length);
     this.espX = Number.parseFloat(this.espX).toFixed(3);
